@@ -16,7 +16,6 @@ const port = process.env.PORT || 8888;
 mongo.connect(connect_mongo, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
     .then((res) => {
         app.listen(port);
-        console.log('Connected')
     })
     .catch((err) => console.log(err))
 

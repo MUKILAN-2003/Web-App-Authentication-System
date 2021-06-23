@@ -1,4 +1,5 @@
 const User = require('../model/user.js')
+const Feedback = require('../model/feedback.js')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
@@ -58,9 +59,16 @@ const signup_post = async(req, res) => {
     }
 }
 
-const feedback_post = (req, res) => {
+const feedback_post = async(req, res) => {
     console.log(req.body)
-    res.end()
+    var feed = new Feedback(req.body);
+    feed.save()
+        .then((result) => {
+            res.redirect('/')
+        })
+        .catch((error) => {
+            console.log(error)
+        })
 }
 
 const logged = async(req, res) => {
