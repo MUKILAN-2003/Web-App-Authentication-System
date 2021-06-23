@@ -1,0 +1,25 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication</title>
+    <link rel="stylesheet" href="css/in_log_sign.css">
+</head>
+
+<body>
+    <%- include('../templates/header.ejs') %>
+        <!--Same class for feedback and login(CSS)-->
+        <div class="login-form">
+            <form action="" method="POST">
+                <h1>Feedback</h1>
+                <input type="text" autocomplete="off" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Name'" name='name' placeholder="Name">
+                <input type="text" autocomplete="off" onfocus="this.placeholder = ''" onblur="this.placeholder = 'E-mail'" name='mail_id' placeholder="E-mail ID">
+                <textarea type="text" cols="21" autocomplete="off" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Feedback'" name='feed' placeholder="Feedback"></textarea>
+                <div class="enter-feed-btn">
+                    <input type="submit" value=" Sumbit ">
+                </div>
+            </form>
+        </div>
+        <%- include('../templates/footer.ejs') %>
+</body>

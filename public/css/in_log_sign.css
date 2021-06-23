@@ -1,0 +1,220 @@
+body {
+    background: linear-gradient(45deg, #acbac4, #2c3e50);
+    margin: 0px;
+    background-repeat: no-repeat;
+    padding: 0px;
+}
+
+
+/*//Index-Msg//*/
+
+.index-msg {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+}
+
+.index-msg a {
+    text-decoration: none;
+    animation: msg-animation 4s infinite ease-in;
+}
+
+@media (min-width:768px) {
+    .index-msg a {
+        font-size: 42px;
+    }
+}
+
+@media (max-width:768px) {
+    .index-msg a {
+        font-size: 22px;
+    }
+}
+
+@keyframes msg-animation {
+    0% {
+        color: tomato;
+    }
+    25% {
+        color: teal;
+    }
+    50% {
+        color: yellowgreen;
+    }
+    75% {
+        color: maroon;
+    }
+    100% {
+        color: deeppink;
+    }
+}
+
+
+/*//Header//*/
+
+.main-header {
+    background-color: rgba(0, 0, 0, 0.507);
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+}
+
+header h1 {
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+    text-shadow: 2px 0px rgb(61, 61, 255);
+}
+
+.main-header a {
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+    text-shadow: px 0px rgb(0, 0, 0);
+}
+
+header h1:hover {
+    text-shadow: 2px 0px rgb(255, 56, 56);
+}
+
+.main-header a:hover {
+    color: black;
+    text-shadow: 1px 0px rgb(248, 248, 248);
+}
+
+@media (min-width:768px) {
+    header h1 {
+        margin: 0px 0px 0px 30px;
+    }
+    .main-btn {
+        margin: 0px 20px 0px 0px;
+        display: flex;
+        align-items: center;
+    }
+    .main-header a {
+        font-size: 24px;
+        padding: 0px 20px 0px 20px;
+        text-decoration: none;
+    }
+}
+
+@media (max-width:768px) {
+    header h1 {
+        margin: 0px 0px 0px 20px;
+    }
+    .main-btn {
+        margin: 0px 0px 0px 0px;
+        display: flex;
+        align-items: center;
+    }
+    .main-header a {
+        font-size: 22px;
+        padding: 0px 20px 0px 20px;
+        text-decoration: none;
+    }
+}
+
+
+/*//Footer//*/
+
+footer {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+}
+
+.main-footer {
+    display: flex;
+    bottom: 0;
+    justify-content: center;
+    border-top: 1px solid black;
+    background-color: rgba(0, 0, 0, 0.507);
+}
+
+.main-footer h5 {
+    margin: 0px;
+}
+
+
+/*//Login Form//*/
+
+.login-form {
+    text-align: center;
+}
+
+.login-form form {
+    box-shadow: 3px 3px 5px 2px black;
+    margin-top: 50px;
+    display: inline-block;
+    background: linear-gradient(rgb(255, 56, 56), rgb(61, 61, 255));
+}
+
+@media (min-width:768px) {
+    .login-form form {
+        width: 25%;
+    }
+}
+
+@media (max-width:768px) {
+    .login-form form {
+        width: 80vw;
+    }
+}
+
+.login-form textarea {
+    resize: vertical;
+    height: 60px;
+}
+
+.login-form h1 {
+    text-decoration: underline;
+}
+
+.login-form input[type='text'],
+[type='password'],
+textarea {
+    outline: none;
+    margin: 20px 0px 20px 0px;
+    height: 30px;
+    border: none;
+    background-color: transparent;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.342);
+}
+
+::placeholder {
+    color: black;
+}
+
+.enter-feed-btn {
+    margin: 20px;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.enter-feed-btn input {
+    color: rgba(255, 56, 56);
+    background-color: black;
+    border: 1px solid black;
+    border-radius: 20px;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.enter-feed-btn input:hover {
+    color: black;
+    background-color: rgba(255, 56, 56, 0.747);
+    box-shadow: 0px 0px 20px 10px rgb(255, 56, 56);
+}
+
+.enter-feed-btn a {
+    margin-top: 20px;
+    color: rgb(255, 56, 56);
+}
+
+.enter-feed-btn a:hover {
+    color: rgb(0, 0, 0);
+}
+
+.enter-feed-btn p {
+    border: 1px solid black;
+}

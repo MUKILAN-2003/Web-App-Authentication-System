@@ -1,0 +1,30 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication</title>
+    <link rel="stylesheet" href="css/in_log_sign.css">
+</head>
+
+<body>
+    <header>
+        <div class="main-header">
+            <div>
+                <a>
+                    <h1>S M</h1>
+                </a>
+            </div>
+            <div class="main-btn">
+                <a>
+                    <%- user_name%>
+                </a>
+                <a href="/logout">Logout</a>
+            </div>
+        </div>
+    </header>
+    <div class="index-msg">
+        <a>Successfully Logged IN</a>
+    </div>
+    <%- include('../templates/footer.ejs') %>
+</body>
