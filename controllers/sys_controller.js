@@ -20,7 +20,7 @@ const feedback_get = (req, res) => {
 }
 
 const createToken = (id) => {
-    return jwt.sign({ id }, "---------UNIQUE KEY(ID)-----------");
+    return jwt.sign({ id }, "-----------UNIQUE KEY(ID)-----------");
 }
 
 const login_post = async(req, res) => {
@@ -73,7 +73,7 @@ const feedback_post = async(req, res) => {
 
 const logged = async(req, res) => {
     if (req.cookies.jwt) {
-        const cookie_id = jwt.verify(req.cookies.jwt, "%$iwudibdiiwd@#$wdjdwnomdw(*&whdwhd#$>idnw(*&^");
+        const cookie_id = jwt.verify(req.cookies.jwt, "-----------UNIQUE KEY(ID)-----------");
         if (cookie_id) {
             const user = await User.findOne({ _id: cookie_id.id }).lean();
             res.render('logged', { user_name: user['name'] })
