@@ -172,6 +172,7 @@ footer {
 
 .login-form input[type='text'],
 [type='password'],
+[type='email'],
 textarea {
     outline: none;
     margin: 20px 0px 20px 0px;
