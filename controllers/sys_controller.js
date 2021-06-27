@@ -20,7 +20,7 @@ const feedback_get = (req, res) => {
 }
 
 const createToken = (id) => {
-    return jwt.sign({ id }, "%$iwudibdiiwd@#$wdjdwnomdw(*&whdwhd#$>idnw(*&^");
+    return jwt.sign({ id }, "---------UNIQUE KEY(ID)-----------");
 }
 
 const login_post = async(req, res) => {
