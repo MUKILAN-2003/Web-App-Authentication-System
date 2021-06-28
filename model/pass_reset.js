@@ -5,6 +5,6 @@ const ResetPass = new mongo.Schema({
     createdAt: { type: Date, default: new Date }
 }, { collection: 'Password Reset' }, { timestamps: true });
 
-ResetPass.index({ createdAt: 1 }, { expireAfterSeconds: 3600 })
+ResetPass.index({ createdAt: 1 }, { expireAfterSeconds: 1800 })
 const modal = mongo.model('ResetPass', ResetPass)
 module.exports = modal;

@@ -10,7 +10,11 @@
 <body>
     <%- include('../templates/header.ejs') %>
         <div class="index-msg">
-            <a>404 Page Not Found</a>
+            <a>
+                <% if (msg !=null || msg!=undefined){%>
+                    <%=msg%>
+                        <%}%>
+            </a>
         </div>
         <%- include('../templates/footer.ejs') %>
 </body>

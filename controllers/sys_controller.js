@@ -3,6 +3,36 @@ const Feedback = require('../model/feedback.js')
 const Reset = require('../model/pass_reset.js')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const nodemailer = require("nodemailer");
+const { getMaxListeners } = require('../model/user.js')
+
+let transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 587, //secure port for modern apps with TLC encryption
+    secure: false, //only true when using 465 port
+    auth: {
+        user: 'mukilan069@gmail.com',
+        pass: 'sjravhxqfdcrgpjr'
+    },
+});
+
+transporter.verify(function(error, success) {
+    if (error) {
+        console.log(error);
+    } else {
+        console.log("Mail Server Check.................ok");
+    }
+});
+
+const send_mail_reset = async() => {
+    let info = await transporter.sendMail({
+        from: 'mukilan069@gmail.com',
+        to: "mukilan069@gmail.com",
+        subject: "Authentication Password Reset",
+        html: "<h2><a href=''>Welcome</a></h2><p>Click Above Link to Reset Password</p>"
+    });
+}
+send_mail_reset().catch(console.error);
 
 const home = (req, res) => {
     res.render("index");
@@ -36,10 +66,10 @@ const pass_reset_post = async(req, res) => {
             req_reset.save()
                 .then(async(result) => {
                     const temp_data = await Reset.findOne({ username: user_reset.username }).lean()
-                    console.log(temp_data)
-                    res.redirect('/')
+                    res.render('404', { msg: 'Check Registered E-Mail to Reset Password' })
                 })
                 .catch((error) => {
+                    console.log(error)
                     res.render("reset_pass_word", { error: 'Username / Mail Invaild' });
                 })
         } else {
