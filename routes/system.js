@@ -14,6 +14,8 @@ router.get("/logged", syscontroller.logged)
 
 router.get("/logout", syscontroller.logout)
 
+router.get("/reset_password", syscontroller.pass_reset_get)
+
 router.get("/feedback", syscontroller.feedback_get)
 
 router.post("/login", syscontroller.login_post)
@@ -21,5 +23,7 @@ router.post("/login", syscontroller.login_post)
 router.post("/signup", syscontroller.signup_post)
 
 router.post("/feedback", syscontroller.feedback_post)
+
+router.post("/reset_password", syscontroller.pass_reset_post)
 
 module.exports = router;

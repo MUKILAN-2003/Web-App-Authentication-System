@@ -1,5 +1,6 @@
 const User = require('../model/user.js')
 const Feedback = require('../model/feedback.js')
+const Reset = require('../model/pass_reset.js')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
@@ -19,8 +20,38 @@ const feedback_get = (req, res) => {
     res.render("feedback");
 }
 
-const createToken = (id) => {
+const createToken_SU = (id) => {
     return jwt.sign({ id }, "%$iwudibdiiwd@#$wdjdwnomdw(*&whdwhd#$>idnw(*&^");
+}
+
+const createToken_PR = (id) => {
+    return jwt.sign({ id }, "^&*(wndi>$#dhwdhw&*(wdmonwdjdw$#@dwiidbiduwi$%");
+}
+
+const pass_reset_post = async(req, res) => {
+    var req_reset = new Reset(req.body);
+    const user_reset = await User.findOne({ username: req_reset.username }).lean()
+    if (user_reset) {
+        if (user_reset.mail == req.body['mail_id']) {
+            req_reset.save()
+                .then(async(result) => {
+                    const temp_data = await Reset.findOne({ username: user_reset.username }).lean()
+                    console.log(temp_data)
+                    res.redirect('/')
+                })
+                .catch((error) => {
+                    res.render("reset_pass_word", { error: 'Username / Mail Invaild' });
+                })
+        } else {
+            res.render("reset_pass_word", { error: 'Username & Mail Mismatch' });
+        }
+    } else {
+        res.render("reset_pass_word", { error: 'Username Invaild' });
+    }
+}
+
+const pass_reset_get = async(req, res) => {
+    res.render("reset_pass_word", { error: null });
 }
 
 const login_post = async(req, res) => {
@@ -30,7 +61,7 @@ const login_post = async(req, res) => {
         res.render("login", { error: "Username does Not Exist" });
     } else {
         if (await bcrypt.compare(user_find.password, user.password)) {
-            const token = createToken(user._id);
+            const token = createToken_SU(user._id);
             res.cookie('jwt', token, { httpOnly: true });
             res.redirect("/logged");
         } else {
@@ -88,4 +119,4 @@ const logout = async(req, res) => {
     res.redirect('/')
 }
 
-module.exports = { home, logged, logout, login_get, signup_get, feedback_get, login_post, signup_post, feedback_post }
+module.exports = { home, pass_reset_post, pass_reset_get, logged, logout, login_get, signup_get, feedback_get, login_post, signup_post, feedback_post }

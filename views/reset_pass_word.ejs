@@ -10,14 +10,13 @@
 <body>
     <%- include('../templates/header.ejs') %>
         <div class="login-form">
-            <form action="/login" method="POST">
-                <h1>Login</h1>
+            <form action="/reset_password" method="POST">
+                <h1>Reset Password</h1>
                 <input type="text" autocomplete="off" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'" name='username' placeholder="Username">
-                <input type="password" autocomplete="off" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'" name="password" placeholder="Password">
+                <input type="email" autocomplete="off" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Mail-ID'" name="mail_id" placeholder="Mail-ID">
                 <div class="enter-feed-btn">
                     <a href="/feedback">Feedback</a>
-                    <a href="/reset_password">Forgot Password?</a>
-                    <input type="submit" value=" Login ">
+                    <input type="submit" value=" Sumbit ">
                     <p>
                         <% if (error !=null || error!=undefined){%>
                             Error :
