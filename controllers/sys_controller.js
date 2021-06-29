@@ -4,7 +4,6 @@ const Reset = require('../model/pass_reset.js')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const nodemailer = require("nodemailer");
-const { getMaxListeners } = require('../model/user.js')
 
 let transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
