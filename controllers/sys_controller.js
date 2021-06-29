@@ -30,14 +30,32 @@ const send_mail_reset = async(mailto, tmpid, tmptoken, userid, tmpname) => {
         from: 'mukilan069@gmail.com',
         to: mailto,
         subject: "Authentication Password Reset",
-        html: `<div style='background: linear-gradient(#acbac4, #2c3e50);text-align:center';>
+        html: `<div style='background: linear-gradient(#acbac4, #2c3e50);text-align:center' ;>
         <br />
-        <h2>Hello ${tmpname},</h2>
-        <h3><a href=${redirect_link} target='_blank'>Click To Reset Password</a></h3>
+        <h1 style='text-align:left' ;>Hello ${tmpname},</h1>
+        <h2><b><a href=${redirect_link} target='_blank'>Click To Reset Password</a></b></h2>
         <p>Link Will be expire in 30 minutes</p>
         <br />
-        </div>`
+        <p style="color:white;width: 100%;background-color: rgba(0, 0, 0, 0.192);">SM Bro's &copy; 2021</p>
+        <br />
+    </div>`
     });
+}
+
+const change_password = async(req, res) => {
+    const get_cookie = jwt.verify(req.cookies.jwt, "^&*(wndi>$#dhwdhw&*(wdmonwdjdw$#@dwiidbiduwi$%");
+    if (get_cookie) {
+        const change_password_user = await User.findOne({ username: get_cookie.id.username }).lean()
+        if (change_password_user) {
+            req.body["password"] = await bcrypt.hash(req.body["password"], 12);
+            User.updateOne({ "username": get_cookie.id.username }, { "password": req.body["password"] }, (err, result) => {
+                if (err) {
+                    console.log(err)
+                }
+            });
+            res.redirect('/login')
+        }
+    }
 }
 
 const email_verification = async(req, res) => {
@@ -45,11 +63,15 @@ const email_verification = async(req, res) => {
     const verify_db_find = await Reset.findOne({ _id: req.params.tmpid }).lean()
     if (user_verify) {
         if (verify_db_find) {
-            const verify_cookie = jwt.verify(req.cookies.jwt, "^&*(wndi>$#dhwdhw&*(wdmonwdjdw$#@dwiidbiduwi$%");
-            if (verify_cookie) {
-                res.render("change_pass", { error: null })
+            if (req.cookies.jwt) {
+                const verify_cookie = jwt.verify(req.cookies.jwt, "^&*(wndi>$#dhwdhw&*(wdmonwdjdw$#@dwiidbiduwi$%");
+                if (verify_cookie) {
+                    res.render("change_pass", { error: null })
+                } else {
+                    res.render("reset_pass_word", { error: 'Session Expired' })
+                }
             } else {
-                res.render("reset_pass_word", { error: 'Session Expired' })
+                res.render("reset_pass_word", { error: 'Session Expires' });
             }
         } else {
             res.render("reset_pass_word", { error: 'Link Expires' });
@@ -178,4 +200,4 @@ const logout = async(req, res) => {
     res.redirect('/')
 }
 
-module.exports = { home, pass_reset_post, pass_reset_get, email_verification, logged, logout, login_get, signup_get, feedback_get, login_post, signup_post, feedback_post }
+module.exports = { home, pass_reset_post, pass_reset_get, email_verification, change_password, logged, logout, login_get, signup_get, feedback_get, login_post, signup_post, feedback_post }

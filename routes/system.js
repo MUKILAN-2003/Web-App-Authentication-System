@@ -18,7 +18,6 @@ router.get("/reset_password", syscontroller.pass_reset_get)
 
 router.get("/reset/password/:tmpid/:tmptoken/:userid", syscontroller.email_verification)
 
-
 router.get("/feedback", syscontroller.feedback_get)
 
 router.post("/login", syscontroller.login_post)
@@ -28,5 +27,7 @@ router.post("/signup", syscontroller.signup_post)
 router.post("/feedback", syscontroller.feedback_post)
 
 router.post("/reset_password", syscontroller.pass_reset_post)
+
+router.post("/reset/password/tmpid/tmptoken/userid", syscontroller.change_password)
 
 module.exports = router;
