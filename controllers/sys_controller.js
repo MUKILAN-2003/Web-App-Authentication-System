@@ -24,15 +24,41 @@ transporter.verify(function(error, success) {
     }
 });
 
-const send_mail_reset = async() => {
+const send_mail_reset = async(mailto, tmpid, tmptoken, userid, tmpname) => {
+    var redirect_link = 'http://localhost:8888/reset/password/' + tmpid + '/' + tmptoken + '/' + userid;
     let info = await transporter.sendMail({
         from: 'mukilan069@gmail.com',
-        to: "mukilan069@gmail.com",
+        to: mailto,
         subject: "Authentication Password Reset",
-        html: "<h2><a href=''>Welcome</a></h2><p>Click Above Link to Reset Password</p>"
+        html: `<div style='background: linear-gradient(#acbac4, #2c3e50);text-align:center';>
+        <br />
+        <h2>Hello ${tmpname},</h2>
+        <h3><a href=${redirect_link} target='_blank'>Click To Reset Password</a></h3>
+        <p>Link Will be expire in 30 minutes</p>
+        <br />
+        </div>`
     });
 }
-send_mail_reset().catch(console.error);
+
+const email_verification = async(req, res) => {
+    const user_verify = await User.findOne({ _id: req.params.userid }).lean()
+    const verify_db_find = await Reset.findOne({ _id: req.params.tmpid }).lean()
+    if (user_verify) {
+        if (verify_db_find) {
+            const verify_cookie = jwt.verify(req.cookies.jwt, "^&*(wndi>$#dhwdhw&*(wdmonwdjdw$#@dwiidbiduwi$%");
+            if (verify_cookie) {
+                res.render("change_pass", { error: null })
+            } else {
+                res.render("reset_pass_word", { error: 'Session Expired' })
+            }
+        } else {
+            res.render("reset_pass_word", { error: 'Link Expires' });
+        }
+    } else {
+        res.render("reset_pass_word", { error: 'Invalid User' });
+    }
+}
+
 
 const home = (req, res) => {
     res.render("index");
@@ -66,6 +92,9 @@ const pass_reset_post = async(req, res) => {
             req_reset.save()
                 .then(async(result) => {
                     const temp_data = await Reset.findOne({ username: user_reset.username }).lean()
+                    const tmp_token = createToken_PR(temp_data);
+                    res.cookie('jwt', tmp_token, { httpOnly: true });
+                    send_mail_reset(user_reset.mail, temp_data._id, tmp_token, user_reset._id, user_reset.name).catch(console.error);
                     res.render('404', { msg: 'Check Registered E-Mail to Reset Password' })
                 })
                 .catch((error) => {
@@ -149,4 +178,4 @@ const logout = async(req, res) => {
     res.redirect('/')
 }
 
-module.exports = { home, pass_reset_post, pass_reset_get, logged, logout, login_get, signup_get, feedback_get, login_post, signup_post, feedback_post }
+module.exports = { home, pass_reset_post, pass_reset_get, email_verification, logged, logout, login_get, signup_get, feedback_get, login_post, signup_post, feedback_post }

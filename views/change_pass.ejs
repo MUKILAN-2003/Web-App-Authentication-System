@@ -1,0 +1,29 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication</title>
+    <link rel="stylesheet" href="css/in_log_sign.css">
+</head>
+
+<body>
+    <%- include('../templates/header.ejs') %>
+        <div class="login-form">
+            <form action="" method="POST">
+                <h1>Change Password</h1>
+                <input type="password" autocomplete="off" onfocus="this.placeholder = ''" onblur="this.placeholder = 'New Password'" name="password" placeholder="New Password">
+                <div class="enter-feed-btn">
+                    <a href="/feedback">Feedback</a>
+                    <input type="submit" value=" Sumbit ">
+                    <p>
+                        <% if (error !=null || error!=undefined){%>
+                            Error :
+                            <%=error%>
+                                <%}%>
+                    </p>
+                </div>
+            </form>
+        </div>
+        <%- include('../templates/footer.ejs') %>
+</body>

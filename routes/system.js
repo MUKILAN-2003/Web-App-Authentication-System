@@ -16,6 +16,9 @@ router.get("/logout", syscontroller.logout)
 
 router.get("/reset_password", syscontroller.pass_reset_get)
 
+router.get("/reset/password/:tmpid/:tmptoken/:userid", syscontroller.email_verification)
+
+
 router.get("/feedback", syscontroller.feedback_get)
 
 router.post("/login", syscontroller.login_post)
