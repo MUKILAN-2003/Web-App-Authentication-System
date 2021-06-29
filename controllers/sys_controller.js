@@ -50,6 +50,9 @@ const change_password = async(req, res) => {
             User.updateOne({ "username": get_cookie.id.username }, { "password": req.body["password"] }, (err, result) => {
                 if (err) {
                     console.log(err)
+                } else {
+                    res.cookie('jwt', {}, { httpOnly: true, maxAge: 1 });
+                    res.redirect('/login')
                 }
             });
             res.redirect('/login')
