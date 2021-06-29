@@ -43,7 +43,7 @@ const send_mail_reset = async(mailto, tmpid, tmptoken, userid, tmpname) => {
 }
 
 const change_password = async(req, res) => {
-    const get_cookie = jwt.verify(req.cookies.jwt, "^&*(wndi>$#dhwdhw&*(wdmonwdjdw$#@dwiidbiduwi$%");
+    const get_cookie = jwt.verify(req.cookies.jwt, "--------------Reset Password Security Key----------------");
     if (get_cookie) {
         const change_password_user = await User.findOne({ username: get_cookie.id.username }).lean()
         if (change_password_user) {
@@ -64,7 +64,7 @@ const email_verification = async(req, res) => {
     if (user_verify) {
         if (verify_db_find) {
             if (req.cookies.jwt) {
-                const verify_cookie = jwt.verify(req.cookies.jwt, "^&*(wndi>$#dhwdhw&*(wdmonwdjdw$#@dwiidbiduwi$%");
+                const verify_cookie = jwt.verify(req.cookies.jwt, "--------------Reset Password Security Key----------------");
                 if (verify_cookie) {
                     res.render("change_pass", { error: null })
                 } else {
@@ -99,11 +99,11 @@ const feedback_get = (req, res) => {
 }
 
 const createToken_SU = (id) => {
-    return jwt.sign({ id }, "%$iwudibdiiwd@#$wdjdwnomdw(*&whdwhd#$>idnw(*&^");
+    return jwt.sign({ id }, "--------------Login Password Security Key----------------");
 }
 
 const createToken_PR = (id) => {
-    return jwt.sign({ id }, "^&*(wndi>$#dhwdhw&*(wdmonwdjdw$#@dwiidbiduwi$%");
+    return jwt.sign({ id }, "--------------Reset Password Security Key----------------");
 }
 
 const pass_reset_post = async(req, res) => {
@@ -185,7 +185,7 @@ const feedback_post = async(req, res) => {
 
 const logged = async(req, res) => {
     if (req.cookies.jwt) {
-        const cookie_id = jwt.verify(req.cookies.jwt, "%$iwudibdiiwd@#$wdjdwnomdw(*&whdwhd#$>idnw(*&^");
+        const cookie_id = jwt.verify(req.cookies.jwt, "--------------Login Password Security Key----------------");
         if (cookie_id) {
             const user = await User.findOne({ _id: cookie_id.id }).lean();
             res.render('logged', { user_name: user['name'] })
