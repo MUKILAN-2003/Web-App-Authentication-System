@@ -12,7 +12,7 @@ let transporter = nodemailer.createTransport({
     secure: false, //only true when using 465 port
     auth: {
         user: 'mukilan069@gmail.com',
-        pass: 'sjravhxqfdcrgpjr'
+        pass: '-----Pass Key-----'
     },
 });
 
