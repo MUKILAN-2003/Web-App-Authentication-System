@@ -24,7 +24,7 @@ transporter.verify(function(error, success) {
 });
 
 const send_mail_reset = async(mailto, tmpid, tmptoken, userid, tmpname) => {
-    var redirect_link = 'http://localhost:8888/reset/password/' + tmpid + '/' + tmptoken + '/' + userid;
+    var redirect_link = 'https://web-authentication-system.herokuapp.com/reset/password/' + tmpid + '/' + tmptoken + '/' + userid;
     let info = await transporter.sendMail({
         from: 'mukilan069@gmail.com',
         to: mailto,
