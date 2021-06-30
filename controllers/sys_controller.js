@@ -24,7 +24,7 @@ transporter.verify(function(error, success) {
 });
 
 const send_mail_reset = async(mailto, tmpid, tmptoken, userid, tmpname) => {
-    var redirect_link = '--------------redirect link----------------;
+    var redirect_link = '--------------redirect link----------------';
     let info = await transporter.sendMail({
         from: 'mukilan069@gmail.com',
         to: mailto,
@@ -55,8 +55,11 @@ const change_password = async(req, res) => {
                     res.redirect('/login')
                 }
             });
-            res.redirect('/login')
+        } else {
+            res.render("reset_pass_word", { error: 'Invalid User' })
         }
+    } else {
+        res.render("reset_pass_word", { error: 'Session Expired' })
     }
 }
 
